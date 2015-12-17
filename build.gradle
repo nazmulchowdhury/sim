@@ -1,0 +1,43 @@
+apply plugin: 'war'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'jetty'
+
+war.archiveName "sim.war"
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+}
+
+dependencies {
+	compile 'org.springframework:spring-webmvc:4.2.3.RELEASE'
+	compile 'org.springframework:spring-jdbc:4.2.3.RELEASE'
+	compile 'org.springframework:spring-orm:4.2.3.RELEASE'
+	compile 'cglib:cglib:3.2.0'
+	compile 'commons-logging:commons-logging:1.2'
+	compile 'javax.servlet:jstl:1.2'
+	compile 'org.hibernate:hibernate-core:4.3.0.Final'
+	compile 'org.hibernate:hibernate-validator:4.3.2.Final'
+	compile 'mysql:mysql-connector-java:5.1.16'
+}
+
+jettyRun{
+	contextPath = "sim"
+	httpPort = 8080
+}
+
+jettyRunWar{
+	contextPath = "sim"
+	httpPort = 8080
+}
+
+eclipse {
+	wtp {
+		component {
+			contextPath = 'sim'
+		}
+	}
+}
